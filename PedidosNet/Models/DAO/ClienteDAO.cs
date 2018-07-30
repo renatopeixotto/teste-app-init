@@ -167,6 +167,16 @@ namespace PedidosNet.Models.DAO
                         objSbSelect.AppendLine(@" AND Cliente.IdCliente = @IdCliente");
                         GetSqlCommand().Parameters.Add("IdCliente", SqlDbType.Int).Value = objVO.Id;
                     }
+                    if (!string.IsNullOrEmpty(objVO.Cpf))
+                    {
+                        objSbSelect.AppendLine(@" AND Cliente.Cpf = @Cpf");
+                        GetSqlCommand().Parameters.Add("Cpf", SqlDbType.VarChar).Value = objVO.Cpf;
+                    }
+                    if (!string.IsNullOrEmpty(objVO.Senha))
+                    {
+                        objSbSelect.AppendLine(@" AND Cliente.Senha = @Senha");
+                        GetSqlCommand().Parameters.Add("Senha", SqlDbType.VarChar).Value = objVO.Senha;
+                    }
                     if (!string.IsNullOrEmpty(objVO.Nome))
                     {
                         objSbSelect.AppendLine(@" AND Cliente.Nome = @Nome");
@@ -195,7 +205,7 @@ namespace PedidosNet.Models.DAO
                         ClienteVO.Telefone = Convert.ToDecimal(GetSqlDataReader()["Telefone"]);
 
                     if (!(GetSqlDataReader().IsDBNull(GetSqlDataReader().GetOrdinal("Senha"))))
-                        ClienteVO.Senha = Convert.ToInt32(GetSqlDataReader()["Senha"]);
+                        ClienteVO.Senha = Convert.ToString(GetSqlDataReader()["Senha"]);
 
                     lstClienteVO.Add(ClienteVO);
                 }

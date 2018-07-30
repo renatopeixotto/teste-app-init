@@ -3,15 +3,15 @@
 
     angular.module('app').controller('indexController', indexController); 
 
-    indexController.$inject = ['$scope', '$cookies', 'pedidoFactory', 'produtoFactory'];
+    indexController.$inject = ['$scope', '$cookies', 'clienteFactory', 'pedidoFactory', 'produtoFactory'];
 
-    function indexController($scope, $cookies, pedidoFactory, produtoFactory) {
+    function indexController($scope, $cookies, clienteFactory, pedidoFactory, produtoFactory) {
         var vm = $scope;
 
         vm.abaProdutos = true;
         vm.abaMeusPedidos = false;
         vm.ProdutoConsulta = {};
-        vm.Cliente = { Id: 1, Cpf: '74583719100', Nome: 'Renato Peixoto', Telefone: '65981150185' };
+        vm.Cliente = {};
         vm.qtdCarrinho = 0;
         vm.valorTotalCarrinho = 0;
         vm.buscarProduto = buscarProduto;
@@ -24,8 +24,18 @@
         vm.finalizarPedido = finalizarPedido;
         vm.deletePedidoProduto = deletePedidoProduto;
 
+        getCliente();
         getProdutos();
         getPedidoProduto();
+
+        function getCliente() {
+            var cpf = "74583719100";
+            var senha = "123465";
+
+            clienteFactory.getCliente(cpf, senha).then(function (response) {
+                vm.Cliente = response.data;
+            });
+        }
 
         function getProdutos() {
             vm.abaProdutos = true;

@@ -29,3 +29,14 @@ C:\Users\UsuarioTeste\source\repos\PedidosNet\PedidosNet\obj\Debug\netcoreapp2.0
 C:\Users\UsuarioTeste\source\repos\PedidosNet\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.AssemblyInfo.cs
 C:\Users\UsuarioTeste\source\repos\PedidosNet\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.dll
 C:\Users\UsuarioTeste\source\repos\PedidosNet\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.pdb
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.csprojResolveAssemblyReference.cache
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.csproj.CoreCompileInputs.cache
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.AssemblyInfoInputs.cache
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.AssemblyInfo.cs
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.dll
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\obj\Debug\netcoreapp2.0\PedidosNet.pdb
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\bin\Debug\netcoreapp2.0\PedidosNet.deps.json
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\bin\Debug\netcoreapp2.0\PedidosNet.runtimeconfig.json
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\bin\Debug\netcoreapp2.0\PedidosNet.runtimeconfig.dev.json
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\bin\Debug\netcoreapp2.0\PedidosNet.dll
+C:\Users\UsuarioTeste\source\repos\teste-app-init\PedidosNet\bin\Debug\netcoreapp2.0\PedidosNet.pdb

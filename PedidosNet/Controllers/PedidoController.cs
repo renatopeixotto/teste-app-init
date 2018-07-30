@@ -1,7 +1,10 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using PedidosNet.Models.VO;
 using PedidosNet.Models.BE;
 
@@ -241,6 +244,7 @@ namespace PedidosNet.Controllers
                     pedidoBE.FecharConexao();
             }
         }
+
     }
 
 }
