@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\fonts\FontAwesome - Copia.otf" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont - Copia.eot" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont - Copia.svg" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont - Copia.ttf" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont - Copia.woff" />
+    <Content Remove="wwwroot\fonts\fontawesome-webfont - Copia.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.0.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties Properties_4launchSettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

@@ -1,0 +1,169 @@
+_______________________________________________________________________________
+
+Renato Peixoto - Teste SQL (30/07/2018)
+_______________________________________________________________________________
+
+================================================================
+QUESTÃO 1
+================================================================
+
+BEGIN TRY
+ 
+	BEGIN TRANSACTION 
+
+     --Dados da UpdatedCurrency que não existam na Currency, deverão ser inseridos na tabela Currency.
+	 INSERT INTO Sales.Currency (UpdatedCurrency.CurrencyCode, UpdatedCurrency.Name, UpdatedCurrency.ModifiedDate)	
+		  SELECT UpdatedCurrency.CurrencyCode, UpdatedCurrency.Name, UpdatedCurrency.ModifiedDate
+			FROM Sales.UpdatedCurrency 
+		   WHERE UpdatedCurrency.CurrencyCode NOT IN (SELECT Currency.CurrencyCode FROM Sales.Currency)
+
+
+	 --Dados que existem na Currency mas não existem na UpdatedCurrency, deverão ser excluídos.
+	 DELETE SOH
+	  FROM Sales.SalesOrderHeader SOH
+INNER JOIN Sales.CurrencyRate CR ON CR.CurrencyRateID = SOH. CurrencyRateID
+INNER JOIN Sales.Currency C ON C.CurrencyCode = CR.ToCurrencyCode	
+      WHERE C.CurrencyCode IN (
+	                          SELECT Currency.CurrencyCode
+	                            FROM Sales.Currency 
+	                           WHERE Currency.CurrencyCode NOT IN (SELECT UpdatedCurrency.CurrencyCode FROM Sales.UpdatedCurrency)
+							  )
+
+	 DELETE SOH
+	  FROM Sales.SalesOrderHeader SOH
+INNER JOIN Sales.CurrencyRate CR ON CR.CurrencyRateID = SOH. CurrencyRateID
+INNER JOIN Sales.Currency C ON C.CurrencyCode = CR.FromCurrencyCode	
+      WHERE C.CurrencyCode IN (
+	                          SELECT Currency.CurrencyCode
+	                            FROM Sales.Currency 
+	                           WHERE Currency.CurrencyCode NOT IN (SELECT UpdatedCurrency.CurrencyCode FROM Sales.UpdatedCurrency)
+							  )
+	 
+	 DELETE CR
+	   FROM Sales.CurrencyRate CR
+ INNER JOIN Sales.Currency C ON C.CurrencyCode = CR.ToCurrencyCode
+      WHERE C.CurrencyCode IN (
+	                          SELECT Currency.CurrencyCode
+	                            FROM Sales.Currency 
+	                           WHERE Currency.CurrencyCode NOT IN (SELECT UpdatedCurrency.CurrencyCode FROM Sales.UpdatedCurrency)
+							  )
+	   
+	 
+	 DELETE CR
+	   FROM Sales.CurrencyRate CR
+ INNER JOIN Sales.Currency C ON C.CurrencyCode = CR.FromCurrencyCode
+      WHERE C.CurrencyCode IN (
+	                          SELECT Currency.CurrencyCode
+	                            FROM Sales.Currency 
+	                           WHERE Currency.CurrencyCode NOT IN (SELECT UpdatedCurrency.CurrencyCode FROM Sales.UpdatedCurrency)
+							  )
+
+
+	 DELETE C 
+	 FROM Sales.Currency C
+	 WHERE C.CurrencyCode IN (
+	                          SELECT Currency.CurrencyCode
+	                            FROM Sales.Currency 
+	                           WHERE Currency.CurrencyCode NOT IN (SELECT UpdatedCurrency.CurrencyCode FROM Sales.UpdatedCurrency)
+							  )
+	 
+	COMMIT
+
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+
+	SELECT ERROR_MESSAGE() AS ErrorMessage; 
+	SELECT ERROR_STATE() AS ErrorState;
+	SELECT ERROR_LINE() AS ErrorLine;
+	SELECT ERROR_NUMBER() AS ErrorNumber;
+	SELECT ERROR_SEVERITY() AS ErrorSeverity;
+
+END CATCH
+
+
+================================================================
+QUESTÃO 2
+================================================================
+
+2.1
+------------
+  SELECT VC.personID, VC.Nome, VC.TotalCompraReais
+    FROM dbo.vVendaCliente VC
+ORDER BY VC.TotalCompraReais DESC
+
+2.2
+------------
+
+DECLARE @TBL Table
+(
+	  personId INT
+	, Nome     VARCHAR (200)
+	, TotalGeralCompras MONEY
+);
+INSERT INTO @TBL
+  SELECT VC.personID, VC.Nome, SUM(VC.TotalCompraReais) AS TotalGeralCompras
+    FROM dbo.vVendaCliente VC
+GROUP BY VC.personID, VC.Nome;
+
+
+     SELECT T.personId, T.Nome, T.TotalGeralCompras 
+       FROM @TBL T 
+      WHERE TotalGeralCompras > 500000 
+   ORDER BY TotalGeralCompras DESC;
+
+2.3
+------------
+DECLARE @TBL Table
+(
+	  personId INT
+	, Nome     VARCHAR (200)
+	, TotalGeralCompras MONEY
+);
+INSERT INTO @TBL
+  SELECT VC.personID, VC.Nome, SUM(VC.TotalCompraReais) AS TotalGeralCompras
+    FROM dbo.vVendaCliente VC
+GROUP BY VC.personID, VC.Nome;
+
+
+     SELECT TOP 10 T.personId, T.Nome, T.TotalGeralCompras 
+       FROM @TBL T 
+      WHERE TotalGeralCompras > 500000 
+   ORDER BY TotalGeralCompras DESC;
+   
+================================================================
+QUESTÃO 3
+================================================================
+
+
+DECLARE @TBL TABLE
+(
+    CountryRegionName VARCHAR(50)
+  , StateProvinceName VARCHAR(50)
+  , Total INT
+);
+INSERT INTO @TBL
+  SELECT 
+         SWA.CountryRegionName
+	   , SWA.StateProvinceName
+	   , (SELECT COUNT(SWA2.BusinessEntityID) 
+	        FROM Sales.vStoreWithAddresses SWA2
+		   WHERE SWA2.CountryRegionName = SWA.CountryRegionName
+		     AND SWA2.StateProvinceName = SWA.StateProvinceName) AS Total
+    FROM Sales.vStoreWithAddresses SWA
+   WHERE SWA.CountryRegionName = 'Canada' OR SWA.CountryRegionName = 'Germany'
+GROUP BY SWA.CountryRegionName, SWA.StateProvinceName;
+
+  SELECT 
+         Name = CASE WHEN GROUPING(T.CountryRegionName) = 0 THEN T.CountryRegionName ELSE 'Total' END,
+		 T.StateProvinceName, 
+		 Total = CASE WHEN GROUPING(T.Total) = 0 THEN  T.Total ELSE (SELECT SUM(T2.Total) 
+	                                                                        FROM @TBL T2
+		                                                                   WHERE T2.CountryRegionName = T.CountryRegionName)  END
+    FROM @TBL T
+GROUP BY  T.CountryRegionName, T.StateProvinceName,  T.Total  WITH ROLLUP
+ HAVING GROUPING(T.CountryRegionName) = 1
+     OR GROUPING(T.StateProvinceName) = 1
+	 OR GROUPING(T.Total) = 0
+
+

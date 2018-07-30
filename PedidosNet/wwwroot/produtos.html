@@ -1,0 +1,36 @@
+﻿
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h4><i class="fa fa-cubes"></i> Produtos Disponíveis <small>Clique em "Adicionar" para adicionar ao carrinho</small></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <th width="10%">&nbsp;</th>
+                        <th width="10%">Id</th>
+                        <th width="30%">Descrição</th>
+                        <th width="20%">Marca</th>
+                        <th width="10%">Valor Unitario</th>
+                        <th width="10%">Qtd Estoque</th>
+                    </tr>
+                    <tbody>
+                        <tr ng-repeat="row in lstProduto | orderBy: 'Descricao'">
+                            <td class="text-center">
+                                <button type="button" class="btn btn-default btn-xs" ng-click="modalAddProdutoCarrinho(row)">
+                                    <i class="fa fa-cart-plus"></i> Adicionar
+                                </button>
+                            </td>
+                            <td>{{row.id}}</td>
+                            <td>{{row.descricao}}</td>
+                            <td>{{row.marca}}</td>
+                            <td>{{row.valorUnitario | currency:'R$ '}}</td>
+                            <td>{{row.quantidadeEstoque | number: 2 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+

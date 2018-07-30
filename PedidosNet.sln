@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedidosNet", "PedidosNet\PedidosNet.csproj", "{370111B6-E303-48E6-A16A-4CF5DDD568CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{370111B6-E303-48E6-A16A-4CF5DDD568CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{370111B6-E303-48E6-A16A-4CF5DDD568CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{370111B6-E303-48E6-A16A-4CF5DDD568CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{370111B6-E303-48E6-A16A-4CF5DDD568CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0039E597-89CC-4419-B843-87F89F0FDA8C} 
+	EndGlobalSection
+EndGlobal

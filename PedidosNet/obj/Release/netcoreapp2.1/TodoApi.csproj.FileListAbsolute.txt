@@ -1,0 +1,13 @@
+C:\Users\renato\source\repos\TodoApi\TodoApi\bin\Release\netcoreapp2.1\TodoApi.deps.json
+C:\Users\renato\source\repos\TodoApi\TodoApi\bin\Release\netcoreapp2.1\TodoApi.runtimeconfig.json
+C:\Users\renato\source\repos\TodoApi\TodoApi\bin\Release\netcoreapp2.1\TodoApi.runtimeconfig.dev.json
+C:\Users\renato\source\repos\TodoApi\TodoApi\bin\Release\netcoreapp2.1\TodoApi.dll
+C:\Users\renato\source\repos\TodoApi\TodoApi\bin\Release\netcoreapp2.1\TodoApi.pdb
+C:\Users\renato\source\repos\TodoApi\TodoApi\obj\Release\netcoreapp2.1\TodoApi.csproj.CoreCompileInputs.cache
+C:\Users\renato\source\repos\TodoApi\TodoApi\obj\Release\netcoreapp2.1\TodoApi.RazorAssemblyInfo.cache
+C:\Users\renato\source\repos\TodoApi\TodoApi\obj\Release\netcoreapp2.1\TodoApi.RazorAssemblyInfo.cs
+C:\Users\renato\source\repos\TodoApi\TodoApi\obj\Release\netcoreapp2.1\TodoApi.AssemblyInfoInputs.cache
+C:\Users\renato\source\repos\TodoApi\TodoApi\obj\Release\netcoreapp2.1\TodoApi.AssemblyInfo.cs
+C:\Users\renato\source\repos\TodoApi\TodoApi\obj\Release\netcoreapp2.1\TodoApi.RazorTargetAssemblyInfo.cache
+C:\Users\renato\source\repos\TodoApi\TodoApi\obj\Release\netcoreapp2.1\TodoApi.dll
+C:\Users\renato\source\repos\TodoApi\TodoApi\obj\Release\netcoreapp2.1\TodoApi.pdb

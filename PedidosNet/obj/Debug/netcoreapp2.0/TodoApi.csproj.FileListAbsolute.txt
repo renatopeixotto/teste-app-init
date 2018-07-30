@@ -1,0 +1,8 @@
+C:\Users\renat\source\repos\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.csprojAssemblyReference.cache
+C:\Users\renat\source\repos\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.csproj.CoreCompileInputs.cache
+C:\Users\renat\source\repos\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.AssemblyInfoInputs.cache
+C:\Users\renat\source\repos\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.AssemblyInfo.cs
+C:\Users\renat\source\repos\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.deps.json
+C:\Users\renat\source\repos\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.runtimeconfig.json
+C:\Users\renat\source\repos\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.runtimeconfig.dev.json
+C:\Users\renat\source\repos\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.dll

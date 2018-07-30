@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>PedidosNet</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+
+<body ng-controller="indexController">
+    <!-- header section -->
+    <header ng-include="'include/header.html'"></header>
+
+    <div class="container-fluid" ng-include="'produtos.html'" ng-if="abaProdutos"></div>
+
+    <div class="container-fluid" ng-include="'pedidos.html'" ng-if="abaMeusPedidos"></div>
+
+    <!-- footer section -->
+    <footer ng-include="'include/footer.html'"></footer>
+
+    <!--MODAL ADD PRODUTO CARRINHO -->
+    <div class="modal fade" id="modal-add-produto-carrinho" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" style="width: 80%; height: auto">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title"><i class="fa fa-cart-plus"></i> Adicionar | <small>Informe a quantidade desejada</small></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Descrição</label>
+                            <input type="text" class="form-control" name="descricao" ng-model="PedidoProduto.Produto.descricao" maxlength="100" readonly="readonly" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Marca</label>
+                            <input type="text" class="form-control" name="marca" ng-model="PedidoProduto.Produto.marca" maxlength="50" readonly="readonly" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Valor Unitario</label>
+                            <input type="text" class="form-control" name="valorUnitario" ng-model="PedidoProduto.Produto.valorUnitario" maxlength="10" readonly="readonly" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Quantidade</label>
+                            <input type="text" class="form-control" name="quantidade" placeholder="Informe a quantidade desejada" ng-model="PedidoProduto.quantidade" ng-pattern="/^[0-9]*$/" maxlength="10" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-left">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-caret-square-o-down">&nbsp</span>Fechar</button>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <button type="button" class="btn btn-success" id="btnAddProdutoCarrinho" title="Confirmar" ng-disabled="(!PedidoProduto.quantidade || PedidoProduto.quantidade <= 0)" ng-click="addProdutoCarrinho(PedidoProduto)">
+                                <i class="fa fa-cart-plus"></i>&nbsp;Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--FIM MODAL ADD PRODUTO CARRINHO  -->
+
+    <!--MODAL CARRINHO -->
+    <div class="modal fade" id="modal-carrinho" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" style="width: 80%; height: auto">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title"><i class="fa fa-shopping-cart"></i> Carrinho | <small>Produtos adicionados ao carrinho</small></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" ng-show="lstPedidoProduto.length">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th width="10%">&nbsp;</th>
+                                    <th width="10%">Id</th>
+                                    <th width="25%">Descrição</th>
+                                    <th width="20%">Marca</th>
+                                    <th width="10%">Valor Unitario</th>
+                                    <th width="10%">Qtde</th>
+                                    <th width="10%" class="text-right">Valor Total</th>
+                                </tr>
+                                <tbody>
+                                    <tr ng-repeat="row in lstPedidoProduto | orderBy: 'Descricao'">
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-danger btn-xs" data-toggle="dropdown" ng-click="deletePedidoProduto(row)">
+                                                <i class="fa fa-trash"></i> Remover
+                                            </button>
+                                        </td>
+                                        <td>{{row.id}}</td>
+                                        <td>{{row.produto.descricao}}</td>
+                                        <td>{{row.produto.marca}}</td>
+                                        <td>{{row.valorUnitario | currency:'R$ '}}</td>
+                                        <td>{{row.quantidade | number: 2 }}</td>
+                                        <td class="text-right">{{row.valorTotalProduto | currency:'R$ ' }}</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="8" class="text-right"><h4><b>{{valorTotalCarrinho | currency:'R$ '}}</b></h4></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-12 text-center" ng-hide="lstPedidoProduto.length">
+                            <h4>Não há produtos no carrinho.</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-left">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-hide="lstPedidoProduto.length"><span class="fa fa-caret-square-o-down">&nbsp</span>Fechar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-show="lstPedidoProduto.length"><span class="fa fa-cart-arrow-down">&nbsp</span>Adicionar mais produtos</button>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <button type="button" class="btn btn-success" id="btnFinalizarPedido" title="Confirmar" ng-show="lstPedidoProduto.length" ng-click="finalizarPedido()">
+                                <i class="fa fa-check"></i>&nbsp;Finalizar Pedido
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--FIM MODAL CARRINHO  -->
+
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-route.min.js"></script>
+    <script src="lib/angular-cookies.min.js"></script>
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="js/app/app.js"></script>
+    <script src="js/app/factory/produto.factory.js"></script>
+    <script src="js/app/factory/pedido.factory.js"></script>
+    <script src="js/app/controller/index.controller.js"></script>
+
+</body>
+
+</html>

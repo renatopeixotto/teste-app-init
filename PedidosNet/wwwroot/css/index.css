@@ -1,0 +1,15 @@
+﻿.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0; 
+    left: 0;
+    padding: 1rem;
+    background-color: #f8f8f8;
+    text-align: center;
+    color: #777;
+    border: 1px solid transparent;
+    border-color: #e7e7e7;
+}
+.top {
+    top: -4px !important;
+}
