@@ -33,6 +33,7 @@
             var senha = "123465";
 
             clienteFactory.getCliente(cpf, senha).then(function (response) {
+                console.log(response.data);
                 vm.Cliente = response.data;
             });
         }

@@ -21,6 +21,5 @@
             }
             return $http.get('/api/cliente/GetCliente', config);
         }
-
     }
 })();
